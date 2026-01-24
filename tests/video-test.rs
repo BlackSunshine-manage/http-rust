@@ -1,4 +1,4 @@
-use https_an::{Video, has_name::has_name};
+use https_an::{Video, has_name::HasName};
 
 #[test]
 fn test_name_not_changed() {

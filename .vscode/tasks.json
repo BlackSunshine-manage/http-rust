@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "clean-target",
+      "type": "shell",
+      "command": "cargo clean",
+      "group": "build"
+    },
+    {
+      "label": "test-with-coverage",
+      "type": "shell",
+      "command": "cargo test --tests",
+      "group": "test",
+      "dependsOn": "clean-target"
+    },
+    {
+      "label": "build-for-coverage",
+      "type": "shell",
+      "command": "cargo build",
+      "group": "build",
+      "dependsOn": "test-with-coverage"
+    },
+    {
+      "label": "generate-coverage-html",
+      "type": "shell",
+      "command": "grcov . -s . --binary-path ./target/debug/ -t html --branch --ignore-not-existing --ignore \"/*\" -o ./target/coverage/",
+      "group": "build",
+      "dependsOn": "build-for-coverage"
+    },
+    {
+      "label": "run-server",
+      "type": "shell",
+      "command": "${workspaceFolder}/target/debug/https-an.exe",
+      "group": "build",
+      "dependsOn": "generate-coverage-html",
+      "presentation": {
+        "echo": true,
+        "reveal": "always",
+        "focus": false,
+        "panel": "new"
+      }
+    },
+    {
+      "label": "full-coverage-run",
+      "dependsOn": ["run-server"],
+      "problemMatcher": [],
+      "group": "build"
+    }
+  ]
+}

@@ -19,6 +19,13 @@
                 ]
             },
             "args": []
+        },
+        { 
+            "name": "Generate code coverage report",
+            "type": "lldb",
+            "request": "launch",
+            "args": [],
+            "preLaunchTask": "full-coverage-run"
         }
     ]
 }
