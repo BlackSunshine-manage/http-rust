@@ -1,10 +1,10 @@
-use crate::HasName::HasName;
+use crate::has_name::has_name;
 
 pub struct Video { 
-    name: String
+    pub name: String
 }
 
-impl HasName for Video {
+impl has_name for Video {
     fn new(name: String) -> Self {
         Video {name}
     }
