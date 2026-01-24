@@ -1,4 +1,4 @@
 pub mod video;
-pub mod HasName;
+pub mod has_name;
 
 pub use video::Video;
