@@ -1,0 +1,15 @@
+[package]
+name = "https-an"
+version = "0.1.0"
+edition = "2024"
+
+#[[bin]]
+#   name = "main"
+#   path = "src/main.rs"
+#
+#[[test]]
+#   name = "module_test"
+#   path = "tests/module-test.rs"
+
+[dependencies]
+video = "0.1.1"

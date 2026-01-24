@@ -7,6 +7,18 @@
           "cargo": {
              "args": ["build", "--manifest-path", "${fileDirname}/../Cargo.toml"]
           }
-      }
+      },
+      {
+            "name": "Debug autoupdated executable rust application",
+            "type": "lldb",
+            "request": "launch",
+            "cargo": {
+                "args": [
+                    "run",
+                    "--bin=https-an"
+                ]
+            },
+            "args": []
+        }
     ]
 }
