@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  test-and-coverage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: llvm-tools-preview
+
+      - name: Install cargo-llvm-cov
+        run: cargo install cargo-llvm-cov --version 0.6.21
+
+      - name: Run tests with coverage
+        run: |
+          cargo llvm-cov \
+            --html --output-dir ./target/coverage \
+            --lcov --output-path ./lcov.info \
+            --fail-under-lines 33 \
+            --fail-under-functions 33 \
+            --fail-under-branches 33
+
+      - name: Upload coverage report (HTML)
+        if: success() || failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: ./target/coverage
+
+      - name: Fail if coverage too low
+        if: failure()
+        run: |
+          echo "::error title=Low Code Coverage::Coverage is below 33% — check artifacts for details."
+          exit 1
