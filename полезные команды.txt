@@ -1,3 +1,0 @@
-cargo llvm-cov --summary                                           суммарное покрытие тестами
-
-cargo llvm-cov --workspace --json --output-path coverage.json      генерация в json

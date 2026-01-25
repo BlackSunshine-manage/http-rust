@@ -7,25 +7,6 @@
           "cargo": {
              "args": ["build", "--manifest-path", "${fileDirname}/../Cargo.toml"]
           }
-      },
-      {
-            "name": "Debug autoupdated executable rust application",
-            "type": "lldb",
-            "request": "launch",
-            "cargo": {
-                "args": [
-                    "run",
-                    "--bin=https-an"
-                ]
-            },
-            "args": []
-      },
-      { 
-            "name": "Generate code coverage report",
-            "type": "lldb",
-            "request": "launch",
-            "args": [],
-            "preLaunchTask": "full-coverage-run"
       }
     ]
 }
