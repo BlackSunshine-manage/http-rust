@@ -21,7 +21,7 @@ jobs:
       run: |
         rustup --version
         cargo --version
-        cargo-llvm-cov --version
+        cargo llvm-cov --version
     - uses: actions/checkout@v4
     - name: Build
       run: cargo build --verbose
