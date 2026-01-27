@@ -15,10 +15,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: install dependency
+      run: cargo install cargo-llvm-cov
     - name: check versions
       run: | 
         rustup --version
         cargo --version
+        cargo-llvm-cov --version
     - uses: actions/checkout@v4
     - name: Build
       run: cargo build --verbose
