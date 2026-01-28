@@ -27,10 +27,15 @@ jobs:
       run: cargo build --verbose
     - name: Run tests
       run: cargo test --verbose
-    - name: Run tests with coverage
+    - name: Run tests and collect coverage data
+      run: cargo llvm-cov --no-report --workspace
+
+    - name: Generate HTML coverage report
+      run: cargo llvm-cov --html --output-dir ./target/coverage
+
+    - name: Generate LCOV and check coverage thresholds
       run: |
         cargo llvm-cov \
-          --html --output-dir ./target/coverage \
           --lcov --output-path ./lcov.info \
           --fail-under-lines 33 \
           --fail-under-functions 33
