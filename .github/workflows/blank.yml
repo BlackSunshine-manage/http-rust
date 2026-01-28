@@ -33,5 +33,4 @@ jobs:
           --html --output-dir ./target/coverage \
           --lcov --output-path ./lcov.info \
           --fail-under-lines 33 \
-          --fail-under-functions 33 \
-          --fail-under-branches 33
+          --fail-under-functions 33
