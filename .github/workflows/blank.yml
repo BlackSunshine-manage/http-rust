@@ -35,7 +35,7 @@ jobs:
           python-version: '3.10'
 
       - name: Check coverage and print table
-        run: python3 scripts/check_coverage.py lcov.info 30
+        run: python3 scripts/check_coverage.py lcov.info 40
   build:
 
     runs-on: ubuntu-latest
