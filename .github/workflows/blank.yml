@@ -25,17 +25,19 @@ jobs:
     - uses: actions/checkout@v4
     - name: Build
       run: cargo build --verbose
-    - name: Run tests
-      run: cargo test --verbose
-    - name: Run tests and collect coverage data
-      run: cargo llvm-cov --no-report --workspace
-
-    - name: Generate HTML coverage report
-      run: cargo llvm-cov --html --output-dir ./target/coverage
-
-    - name: Generate LCOV and check coverage thresholds
+    - name: Run tests with coverage and check thresholds
       run: |
         cargo llvm-cov \
           --lcov --output-path ./lcov.info \
           --fail-under-lines 33 \
-          --fail-under-functions 33
+          --fail-under-functions 33 \
+          --workspace
+
+    - name: Generate HTML coverage report (from existing data)
+      run: cargo llvm-cov --html --output-dir ./target/coverage
+
+    - name: Upload coverage report as artifact (optional)
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: ./target/coverage
