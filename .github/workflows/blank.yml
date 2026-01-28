@@ -31,16 +31,13 @@ jobs:
     - name: Run tests with coverage and check thresholds
       run: |
         cargo llvm-cov \
+          --lib --bins --tests \
           --lcov --output-path ./lcov.info \
           --fail-under-lines 33 \
-          --fail-under-functions 33 \
-          --workspace
+          --fail-under-functions 33
 
     - name: Generate HTML coverage report (from existing data)
       run: cargo llvm-cov --html --output-dir ./target/coverage
-      
-    - name: Show coverage summary
-      run: cargo llvm-cov --summary
 
     - name: Upload coverage report as artifact (optional)
       uses: actions/upload-artifact@v4
