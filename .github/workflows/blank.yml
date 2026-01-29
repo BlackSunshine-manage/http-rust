@@ -11,6 +11,7 @@ env:
 
 jobs:
   coverage:
+    needs: build
     runs-on: ubuntu-latest
     env:
       CARGO_TERM_COLOR: always
