@@ -1,0 +1,25 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "clean",
+      "type": "shell",
+      "command": "cargo clean"
+    },
+    {
+      "label": "generate-coverage-html",
+      "type": "shell",
+      "command": "cargo llvm-cov --html",
+      "windows": {
+        "command": "cargo llvm-cov --html"
+      },
+      "dependsOn": "clean",
+      "group": "build"
+    },
+    {
+      "label": "full-coverage-run",
+      "dependsOn": ["generate-coverage-html"],
+      "problemMatcher": []
+    }
+  ]
+}
