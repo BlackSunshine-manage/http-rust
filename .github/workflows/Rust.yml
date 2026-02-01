@@ -1,0 +1,37 @@
+name: Rust
+
+on:
+  pull_request:
+    branches: [ "dev", "master" ]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        run: rustup update stable
+
+      - name: Install cargo-llvm-cov
+        run: cargo install cargo-llvm-cov
+
+      - name: Build
+        run: cargo build --verbose
+
+      - name: Run tests with coverage
+        run: |
+          cargo llvm-cov \
+            --lib --bins --tests \
+            --lcov --output-path lcov.info
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Check coverage
+        run: python3 scripts/check_coverage.py lcov.info 40
